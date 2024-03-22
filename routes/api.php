@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MilestoneController;
+use App\Http\Controllers\Api\V1\MilestoneStatusController;
 use App\Http\Controllers\Api\V1\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function(){
     Route::apiResource('/projects', ProjectController::class);
+    Route::apiResource('/milestones', MilestoneController::class);
+    Route::patch('/milestones/{milestone}/status', MilestoneStatusController::class);
 });
 
 Route::get('/user', function (Request $request) {
