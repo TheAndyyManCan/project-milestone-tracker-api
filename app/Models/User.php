@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function projects(): HasMany {
         return $this->hasMany(Project::class);
     }
+
+    public function milestones(): HasMany {
+        return $this->hasMany(Milestone::class);
+    }
 }

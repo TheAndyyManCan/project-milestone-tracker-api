@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectResource extends JsonResource
+class MilestoneResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,10 +18,12 @@ class ProjectResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'author' => $this->user->name,
+            'description' => $this->description,
+            'status' => $this->status,
             'deadline' => $this->deadline,
             'time_left' => Carbon::createFromDate($this->deadline)->diffForHumans(),
-            'milestones' => MilestoneResource::collection($this->milestones)
+            'project' => $this->project->name,
+            'author' => $this->user->name
         ];
     }
 }
