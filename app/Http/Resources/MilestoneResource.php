@@ -22,8 +22,8 @@ class MilestoneResource extends JsonResource
             'status' => $this->status,
             'deadline' => $this->deadline,
             'time_left' => Carbon::createFromDate($this->deadline)->diffForHumans(),
-            'project' => $this->project->name,
-            'author' => $this->user->name
+            'project' => $this->project->id,
+            'author' => $this->user->id
         ];
     }
 }

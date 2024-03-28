@@ -17,9 +17,10 @@ class ProjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'author' => $this->user->name,
+            'title' => $this->title,
+            'author' => $this->user->id,
             'deadline' => $this->deadline,
+            'description' => $this->description,
             'time_left' => Carbon::createFromDate($this->deadline)->diffForHumans(),
             'milestones' => MilestoneResource::collection($this->milestones)
         ];

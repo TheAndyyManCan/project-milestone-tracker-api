@@ -23,8 +23,9 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'name' => 'required|string|max:255',
-            'deadline' => 'date_format:Y-m-d'
+            'title' => 'required|string|max:255',
+            'deadline' => 'date_format:Y-m-d',
+            'description' => 'string'
         ];
     }
 }

@@ -11,7 +11,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'deadline', 'user_id'];
+    protected $fillable = ['title', 'deadline', 'user_id', 'description'];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
