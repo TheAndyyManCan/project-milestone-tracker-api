@@ -20,4 +20,8 @@ class Project extends Model
     public function milestones(): HasMany {
         return $this->hasMany(Milestone::class);
     }
+
+    public function permissions(): HasMany {
+        return $this->hasMany(ProjectPermission::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
+use App\Models\ProjectPermission;
 
 class ProjectController extends Controller
 {
@@ -24,6 +25,11 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $project = Project::create($request->validated());
+        ProjectPermission::create([
+            'project_id' => $project->id,
+            'user_id' => $request->user_id,
+            'permission_level' => 4
+        ]);
         return ProjectResource::make($project);
     }
 
