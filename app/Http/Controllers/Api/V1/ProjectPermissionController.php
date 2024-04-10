@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePermissionRequest;
+use App\Http\Requests\UpdatePermissionRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\UserPermissionResource;
 use App\Models\Project;
 use App\Models\ProjectPermission;
 use Illuminate\Http\Request;
@@ -29,34 +32,22 @@ class ProjectPermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Project $project, ProjectPermission $projectPermission)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProjectPermission $projectPermission)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProjectPermission $projectPermission)
+    public function update(UpdatePermissionRequest $request, ProjectPermission $projectPermission)
     {
-        //
+        $projectPermission->update($request->validated());
+        return ProjectResource::make($projectPermission->project);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectPermission $projectPermission)
+    public function destroy(ProjectPermission $permission)
     {
-        //
+        $projectId = $permission->project->id;
+        $permission->delete();
+        $project = Project::find($projectId);
+        return ProjectResource::make($project);
     }
 }
