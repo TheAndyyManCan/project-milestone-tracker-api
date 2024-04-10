@@ -16,8 +16,7 @@ class PermissionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'permission_level' => $this->permission_level,
-           'project' => [
+            'project' => [
                 'id' => $this->project->id,
                 'title' => $this->project->title,
                 'author' => $this->project->user->id,
