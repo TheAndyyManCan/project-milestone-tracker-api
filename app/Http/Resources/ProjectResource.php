@@ -28,7 +28,7 @@ class ProjectResource extends JsonResource
                                     ->where('project_id', $this->id)
                                     ->first()
                                     ->permission_level,
-            'users_permissions' => [
+            'user_permissions' => [
                 'spectator' => UserPermissionResource::collection($this->permissions->where('permission_level', 1)),
                 'team_member' => UserPermissionResource::collection($this->permissions->where('permission_level', 2)),
                 'admin' => UserPermissionResource::collection($this->permissions->where('permission_level', 3)),

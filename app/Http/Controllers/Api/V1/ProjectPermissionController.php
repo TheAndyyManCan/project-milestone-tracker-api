@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePermissionRequest;
+use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Models\ProjectPermission;
 use Illuminate\Http\Request;
@@ -17,19 +20,12 @@ class ProjectPermissionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePermissionRequest $request)
     {
-        //
+        $permission = ProjectPermission::create($request->validated());
+        return ProjectResource::make($permission->project);
     }
 
     /**
