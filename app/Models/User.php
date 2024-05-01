@@ -58,4 +58,8 @@ class User extends Authenticatable
     public function permissions(): HasMany {
         return $this->hasMany(ProjectPermission::class);
     }
+
+    public function milestoneComments(): HasMany {
+        return $this->hasMany(MilestoneComments::class);
+    }
 }

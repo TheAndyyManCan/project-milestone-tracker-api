@@ -7,8 +7,6 @@ use App\Http\Requests\StoreMilestoneRequest;
 use App\Http\Requests\UpdateMilestoneRequest;
 use App\Http\Resources\MilestoneResource;
 use App\Models\Milestone;
-use App\Models\Project;
-use Illuminate\Http\Request;
 
 class MilestoneController extends Controller
 {

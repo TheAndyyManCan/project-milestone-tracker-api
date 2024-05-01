@@ -17,32 +17,32 @@ class UserResource extends JsonResource
     {
 
         $spectatorPermissions = ProjectPermission::where('user_id', $this->id)
-                                                ->where('permission_level', 1)
-                                                ->get();
+            ->where('permission_level', 1)
+            ->get();
         $spectatorProjects = [];
         foreach($spectatorPermissions as $permission){
             array_push($spectatorProjects, $permission->project);
         }
 
         $teamMemberPermissions = ProjectPermission::where('user_id', $this->id)
-                                                ->where('permission_level', 2)
-                                                ->get();
+            ->where('permission_level', 2)
+            ->get();
         $teamMemberProjects = [];
         foreach($teamMemberPermissions as $permission){
             array_push($teamMemberProjects, $permission->project);
         }
 
         $adminPermissions = ProjectPermission::where('user_id', $this->id)
-                                                ->where('permission_level', 3)
-                                                ->get();
+            ->where('permission_level', 3)
+            ->get();
         $adminProjects = [];
         foreach($adminPermissions as $permission){
             array_push($adminProjects, $permission->project);
         }
 
         $authorPermissions = ProjectPermission::where('user_id', $this->id)
-                                                ->where('permission_level', 4)
-                                                ->get();
+            ->where('permission_level', 4)
+            ->get();
         $authorProjects = [];
         foreach($authorPermissions as $permission){
             array_push($authorProjects, $permission->project);

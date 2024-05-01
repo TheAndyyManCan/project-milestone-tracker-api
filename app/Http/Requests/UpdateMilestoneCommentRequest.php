@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StorePermissionRequest extends FormRequest
+class UpdateMilestoneCommentRequest extends StoreMilestoneCommentRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $authPermission = Auth::user()->permissions->where('project_id', $this->project_id)->first();
-
-        if($authPermission->permission_level >= 3){
+        if(Auth::user()->id == $this->milestonecomment->user_id){
             return true;
         } else {
             return false;
@@ -29,9 +26,7 @@ class StorePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_id' => 'required|exists:projects,id',
-            'user_id' => 'required|exists:users,id',
-            'permission_level' => 'required|int'
+            'content' => 'required|string'
         ];
     }
 }

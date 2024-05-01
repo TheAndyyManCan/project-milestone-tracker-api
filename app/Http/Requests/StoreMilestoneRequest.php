@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMilestoneRequest extends FormRequest
 {
@@ -11,7 +12,13 @@ class StoreMilestoneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $authPermission = Auth::user()->permissions->where('project_id', $this->project_id)->first();
+
+        if($authPermission->permission_level >= 3){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
