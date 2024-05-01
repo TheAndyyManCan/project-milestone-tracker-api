@@ -6,18 +6,18 @@ use App\Models\Milestone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreMilestoneCommentRequest extends FormRequest
+class StoreMilestoneAllocationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        // Check if the currently logged in user has sufficient permissions to create a new comment
+        // Check if currently logged in user has permissions to add an allocation for themselves or another user
         $milestone = Milestone::all()->where('id', $this->milestone_id)->first();
         $authPermission = Auth::user()->permissions->where('project_id', $milestone->project_id)->first();
 
-        return $authPermission->permission_level >= 2;
+        return $authPermission >= 3 || ($authPermission >= 2 && Auth::user()->id == $this->user_id);
     }
 
     /**
@@ -29,8 +29,7 @@ class StoreMilestoneCommentRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'milestone_id' => 'required|exists:milestones,id',
-            'content' => 'required|string'
+            'milestone_id' => 'required|exists:milestones,id'
         ];
     }
 }

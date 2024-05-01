@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function milestoneComments(): HasMany {
         return $this->hasMany(MilestoneComments::class);
     }
+
+    public function allocations(): HasMany {
+        return $this->hasMany(MilestoneAllocation::class);
+    }
 }

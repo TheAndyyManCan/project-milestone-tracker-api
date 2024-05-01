@@ -24,4 +24,8 @@ class Milestone extends Model
     public function comments(): HasMany {
         return $this->hasMany(MilestoneComments::class);
     }
+
+    public function allocations(): HasMany {
+        return $this->hasMany(MilestoneAllocation::class);
+    }
 }
